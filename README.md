@@ -28,7 +28,11 @@ it and it lives by it, but it does not own it.
 | `CHANGELOG.md` | Every rule change, dated, with who decided it. |
 | `sync/consumers.json` | Every repo that carries the block. Adding a site is one line. |
 | `sync/apply_block.py` | Swaps the block in one file. Exits 1 if nothing changed, 2 if the markers are missing. |
-| `.github/workflows/sync-rules.yml` | Fans the block out as docs-only PRs. |
+| `.github/workflows/sync-rules.yml` | Fans the block out as docs-only PRs, on every rules change and weekly. |
+| `.github/workflows/gather.yml` | Saturday 03:00 Phoenix. Collects facts about all five repos into `reviews/<date>/`. No AI. |
+| `.github/workflows/review.yml` | Saturday 04:00 Phoenix. Reads that evidence, proposes rule changes, files tasks, reports back. Inert until armed. |
+| `review/gather.py`, `review/analyze.py` | The two halves of the weekly loop. See `REVIEW.md`. |
+| `reviews/<date>/` | The audit trail: one folder per week, evidence first, proposal second. |
 
 ## How a rule change travels
 
@@ -57,6 +61,13 @@ it opened; there is no remote import. Text that stays here reaches nobody.
 
 The token is a GitHub secret and never appears in this repo. `RULES.md` R1 applies here
 like everywhere else.
+
+That one secret runs the sync and the Saturday gather. The Saturday analysis stays inert
+until three more are added, and each one degrades on its own: `ANTHROPIC_API_KEY` (without
+it the whole analysis is inert and passes green), `NTHSKY_FEDERATION_KEY` (without it
+findings stay in the PR instead of landing on spoke boards), and `NTHSKY_BUILDER_TOKEN`, a
+`bsk_` builder token (without it the weekly summary stays in the PR instead of reaching the
+build bridge). Full table in `REVIEW.md`.
 
 ## The one rule about this repo
 

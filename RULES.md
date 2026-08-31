@@ -36,8 +36,9 @@ period. The whole network was swept clean of them; do not reintroduce any. This 
 your replies in chat, which is where they slip back in most often: the first version of
 this rule listed only files, so sessions read it as an artifact rule and let conversation
 slide. Watch for the escaped form too, a backslash-u-2014 sequence inside a JS string: a
-literal grep will not catch it, and it renders as a real em dash to the reader. Every AI surface carries it as a system-prompt style rule (`NO_EM_DASH` in each
-worker). Standing exception: `docs/infra-versions/` snapshots are frozen and never edited.
+literal grep will not catch it, and it renders as a real em dash to the reader. Every AI
+surface carries it as a system-prompt style rule (`NO_EM_DASH` in each worker). Standing
+exception: `docs/infra-versions/` snapshots are frozen and never edited.
 
 **Four signals, so the reader can tell categories apart at a glance** (owner call,
 2026-08-31). When a table name and a company are formatted identically, the reader cannot
@@ -108,6 +109,19 @@ bodies, not in code comments, not in site copy.
 Platform machinery already exists somewhere in the network (auth, invites, vault, push,
 E2E harness, nightly ops, federation). Port it, do not reinvent it. A bug fixed once is a
 bug class everywhere: when you fix one, check whether the sibling sites share it.
+
+### R11. KAMERA - the test every proposed change is judged against
+**K**eep it simple, **A**dapt to current tech, **M**odernize and maintain, **E**fficient
+for the user, **R**ealistically viable, **A**wesome experience. Build it if it satisfies
+these, or at least opposes none. User suggestions flow through the in-app KAMERA queue
+where a site has one: AI-assessed, admin-decided.
+
+### R12. Who you are writing for
+The owner (Rhys) is technical-adjacent: comfortable with APIs, datasets and AI-assisted
+development, not a hand-coder. Explain what a change does and why in plain terms, give the
+exact steps to deploy or test it, and do not assume framework knowledge. Say what you
+actually did and what you did not do. If a check failed, show the output rather than
+summarising it away.
 <!-- AIRULES:END -->
 
 ---

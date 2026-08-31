@@ -65,9 +65,62 @@ rules that describe a network that no longer exists, lessons whose root cause wa
 The only defence is that every claim here names its evidence. If an entry cannot cite a
 commit, an incident, or an owner decision, it is an opinion, and it does not go in.
 
-## Automating loop 2 (not built, deliberately)
+## The schedule
 
-A scheduled Action could run a session against this protocol on its own. It needs an
-Anthropic API key in this repo's secrets and a decision from the owner about whether an
-unattended session may open PRs across five repos. Until that decision is made, loop 2 is
-owner-invoked and this paragraph stays here as the open question, not as a plan.
+Two jobs, an hour apart, on Saturday mornings Phoenix time. Arizona does not observe DST,
+so UTC-7 holds all year and neither cron drifts twice a season.
+
+| When | Job | Needs | Does |
+|---|---|---|---|
+| Sat 03:00 | `gather.yml` | `AIRULES_SYNC_TOKEN` | Clones all five repos, collects facts, commits `reviews/<date>/evidence.json`. No AI, no judgement, no writes to any site. |
+| Sat 04:00 | `review.yml` | the three below | Reads that evidence, decides what it means, opens a proposal PR here, files evidenced tasks on the spoke boards, posts one summary to the build bridge. |
+
+The hour between them is load-bearing, not padding. The evidence has to be committed
+before the analysis reads it; and when the analysis breaks, is switched off, or is simply
+not worth paying for that week, the record still exists and the analysis can be re-run
+alone without re-gathering. Keeping the cheap half independent of the expensive half is
+the whole reason they are two jobs.
+
+The gather works from the day the repo exists, on the one secret the sync already needs.
+
+## Arming loop 2
+
+`review.yml` ships inert. With no `ANTHROPIC_API_KEY` it logs why and passes green, the
+same way the rest of the network ships gated features unarmed. It never fails a workflow
+for being unarmed, because a red cross every Saturday teaches everyone to ignore red
+crosses.
+
+Three secrets turn it on, all in this repo only:
+
+| Secret | For | Without it |
+|---|---|---|
+| `ANTHROPIC_API_KEY` | the analysis itself | the whole job stays inert |
+| `NTHSKY_FEDERATION_KEY` | filing tasks on spoke boards | findings stay in the PR, listed as not placed |
+| `NTHSKY_BUILDER_TOKEN` | the summary on the build bridge | the summary stays in the PR |
+
+They degrade independently and on purpose: a missing bridge token loses the notification,
+not the review.
+
+## What it can and cannot reach
+
+Tasks can be filed on **ovrops**, **OVR3D** and **OVRFLIGHT**, which accept
+`POST /api/nthsky/tasks` behind the shared federation key. **TeamTrain** exposes only the
+GET, so it can be read and never assigned to; its findings appear in the proposal and the
+summary, named as unplaceable rather than silently dropped. The hub's own board takes work
+through the bridge.
+
+## Why the analysis runs here and not in each repo
+
+The obvious design is for this repo to push a weekly file out and let each site analyse
+itself. It does not work, for one reason: the highest-value check is R10, does this bug
+class exist on the siblings, and no repo can answer that about itself. A session inside
+**ovrops** cannot see the fix that landed in **OVR3D**. So the analysis checks out all
+five together and runs once, which also means one API key instead of five and one place to
+change the prompt.
+
+## The open decision
+
+An unattended session now proposes rule changes and files tasks on live boards. It never
+edits a site and never merges its own PR, which is the line drawn on purpose. Whether it
+should ever be allowed past that line is the owner's call, and until it is made, this
+paragraph stays here as the question rather than as a plan.

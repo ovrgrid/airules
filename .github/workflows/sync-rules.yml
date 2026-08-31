@@ -72,10 +72,8 @@ jobs:
             git config user.email "noreply@anthropic.com"
             git checkout -B "${branch}"
             git add "${file}"
-            git commit -q -m "Sync network rules block to ${version}
-
-Automated from ovrgrid/airules RULES.md. Do not edit the block in this repo:
-the next sync overwrites it. Change the rules in airules instead."
+            git commit -q -m "Sync network rules block to ${version}" \
+              -m "Automated from ovrgrid/airules RULES.md. Do not edit the block in this repo: the next sync overwrites it. Change the rules in airules instead."
             git push -f -u origin "${branch}"
             gh pr create --repo "${repo}" --base "${base}" --head "${branch}" \
               --title "Sync network rules block to ${version}" \

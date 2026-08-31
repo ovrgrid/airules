@@ -1,0 +1,62 @@
+name: Weekly gather (facts)
+
+# Saturday 03:00 Phoenix. Arizona does not observe DST, so UTC-7 holds all year and this
+# cron never drifts by an hour twice a season.
+#
+# Collects evidence about every repo and commits it. No AI, no judgement, no writes to any
+# site. Needs only AIRULES_SYNC_TOKEN, the same secret the rules sync uses, so this half
+# works from the day the repo exists.
+
+on:
+  schedule:
+    - cron: '0 10 * * 6'
+  workflow_dispatch:
+    inputs:
+      window:
+        description: 'How far back to look'
+        default: '7 days ago'
+
+jobs:
+  gather:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Clone every consumer
+        env:
+          GH_TOKEN: ${{ secrets.AIRULES_SYNC_TOKEN }}
+        run: |
+          set -euo pipefail
+          mkdir -p work
+          python3 -c "
+          import json
+          print('\n'.join(c['repo'] for c in json.load(open('sync/consumers.json'))['consumers']))
+          " | while read -r repo; do
+            name="${repo#ovrgrid/}"
+            git clone --quiet --filter=blob:none \
+              "https://x-access-token:${GH_TOKEN}@github.com/${repo}.git" "work/${name}"
+          done
+
+      - name: Gather
+        run: |
+          set -euo pipefail
+          day=$(date -u +%Y-%m-%d)
+          echo "REVIEW_DIR=reviews/${day}" >> "$GITHUB_ENV"
+          python3 review/gather.py work "reviews/${day}" . "${{ inputs.window || '7 days ago' }}"
+
+      - name: Commit the evidence
+        run: |
+          set -euo pipefail
+          git config user.name  "airules-gather"
+          git config user.email "noreply@anthropic.com"
+          git add reviews
+          git diff --cached --quiet && { echo "nothing new"; exit 0; }
+          git commit -q -m "Gather: evidence for $(date -u +%Y-%m-%d)"
+          git push
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gather-${{ github.run_id }}
+          path: reviews/
