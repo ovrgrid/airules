@@ -13,6 +13,22 @@ first. Append only; a lesson that stops being true gets a correcting entry, not 
 
 ---
 
+### 2026-09-14 - "Cannot" was a strategy preference wearing a law's clothes
+The **OVRMARK** product board told Rhys that consent for pooled data cannot be obtained
+retroactively, and leaned on that to make the ownership model the one decision that could
+never be corrected later. He asked what actually stops a contract amendment plus a shared
+access pathway from doing exactly that. Nothing does. Re-consent by amendment is ordinary
+commercial practice, and he was right to refuse to put an impossibility on a board that
+investors and customers will audit.
+**Root cause:** a planning preference (settle ownership early) was written in the grammar of
+a hard constraint, because the hard grammar made the recommendation sound more urgent. The
+real constraint was one level down and had been stepped over: the permission is recoverable
+by amendment, but the provenance recorded beside each row is not, so what has to be right
+before the first row is written is the schema, not the signature. The narrower claim is also
+the more useful one, because it names something a session can actually build.
+**Produced:** R13. And a habit: when a claim of impossibility collapses, go one level down
+and find the true constraint rather than quietly deleting the sentence.
+
 ### 2026-08-31 - A rule that lists files leaks into chat
 The em-dash ban had been in force since 2026-08-22 and kept failing anyway. Two causes,
 both structural, neither about effort. First, the rule existed in exactly one repo's

@@ -1,6 +1,6 @@
 # AIRULES - the network operating ruleset
 
-**Version 1.0 - 2026-08-31.** Owner: Rhys Andersen. This file is the single source of the
+**Version 1.1 - 2026-09-14.** Owner: Rhys Andersen. This file is the single source of the
 rules every Claude session follows on every ovrgrid site. It is not documentation about the
 rules. It IS the rules: the block between the markers below is copied verbatim into every
 repo's `CLAUDE.md` by the sync, so a session reads it before it does anything.
@@ -13,7 +13,7 @@ change that the next sync deletes.
 
 ---
 
-<!-- AIRULES:START v1.0 -->
+<!-- AIRULES:START v1.1 -->
 ## Network rules (synced from `ovrgrid/airules` - do not edit here)
 
 These come from `RULES.md` in `ovrgrid/airules` and are identical in every ovrgrid repo.
@@ -122,6 +122,20 @@ development, not a hand-coder. Explain what a change does and why in plain terms
 exact steps to deploy or test it, and do not assume framework knowledge. Say what you
 actually did and what you did not do. If a check failed, show the output rather than
 summarising it away.
+
+### R13. An impossibility has to name its mechanism
+A reader tests the strongest claim on the page first, so "cannot be done" has to survive
+being tested. Before writing that something is impossible, irreversible or permanent, name
+the thing that makes it so: a law, a signed agreement, a physical limit, a documented vendor
+cap. If you cannot name one, it is not impossible, it is expensive. Write it as a cost with
+a rough size, and say what paying that cost buys back. The two errors are not the same size:
+a limit understated gets corrected in review, while a limit overstated gets corrected by an
+investor or a customer in front of everyone, and it puts every other claim beside it in
+doubt. This binds hardest on investor and customer material, where the claims are
+load-bearing, and it applies to chat replies like every other rule here. When a claim of
+impossibility does collapse, the true constraint is usually one level down and more useful
+than the false one, so go and find it rather than just deleting the sentence. See the
+2026-09-14 entry in `LESSONS.md`.
 <!-- AIRULES:END -->
 
 ---
