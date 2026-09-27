@@ -1,6 +1,6 @@
 # AIRULES - the network operating ruleset
 
-**Version 1.2 - 2026-09-27.** Owner: Rhys Andersen. This file is the single source of the
+**Version 1.3 - 2026-09-27.** Owner: Rhys Andersen. This file is the single source of the
 rules every Claude session follows on every ovrgrid site. It is not documentation about the
 rules. It IS the rules: the block between the markers below is copied verbatim into every
 repo's `CLAUDE.md` by the sync, so a session reads it before it does anything.
@@ -13,7 +13,7 @@ change that the next sync deletes.
 
 ---
 
-<!-- AIRULES:START v1.2 -->
+<!-- AIRULES:START v1.3 -->
 ## Network rules (synced from `ovrgrid/airules` - do not edit here)
 
 These come from `RULES.md` in `ovrgrid/airules` and are identical in every ovrgrid repo.
@@ -166,6 +166,28 @@ follow-up an AI raises - is one kind of thing with one profile, managed at the h
   when overdue work escalates, each with its control on an admin screen.
 - **The test:** if the holder never opens the page the task was made on, do they still see
   it, and can an admin still find it and see who had it last? If not, it is lost.
+
+### R15. One library - the same rules as tasks, for files
+Owner call, 2026-09-27: "The project library should be the library - but just as the same
+with Tasks - the library should have chain of custody that shows up based on who has access
+to what and what their role is." Every file the network keeps for people to work from - a
+spec, a drawing, a photo, a signed form, a test record - lives in one library at the hub
+(**NTHSKY**), in a section per project, team, program or site. The contract is the hub's
+`docs/LIBRARY-STANDARD.md`; do not build another file store.
+- **Membership opens the section; a role can narrow a file.** Adding someone to a project
+  or team gives them its library. A team leader (or above) can mark a file "this role or
+  above", and then nobody below it sees it in a list, finds it in search or fetches it by
+  id.
+- **Chain of custody.** Who put it there, every new version, move, access change, view and
+  download, with who and when, kept with the file. Everyone who can see a file sees its
+  history of versions and access; leaders and admins also see who viewed and downloaded it.
+  Files are archived, never silently deleted, and a new version never erases the old one.
+- **Three views, one file.** The section's Library tab on its page, the hub's admin Library
+  across every section, and a person's profile (what they uploaded, what they can open).
+- **Public media is not the library.** Images a public page serves are public by design and
+  never hold anything confidential; everything else goes in the library.
+- **The test:** could an admin say who has this file, who has seen it and who put it
+  there, and would someone added to the team tomorrow find it without being sent a link?
 <!-- AIRULES:END -->
 
 ---
