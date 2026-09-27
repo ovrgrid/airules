@@ -1,6 +1,6 @@
 # AIRULES - the network operating ruleset
 
-**Version 1.1 - 2026-09-23.** Owner: Rhys Andersen. This file is the single source of the
+**Version 1.2 - 2026-09-27.** Owner: Rhys Andersen. This file is the single source of the
 rules every Claude session follows on every ovrgrid site. It is not documentation about the
 rules. It IS the rules: the block between the markers below is copied verbatim into every
 repo's `CLAUDE.md` by the sync, so a session reads it before it does anything.
@@ -13,7 +13,7 @@ change that the next sync deletes.
 
 ---
 
-<!-- AIRULES:START v1.1 -->
+<!-- AIRULES:START v1.2 -->
 ## Network rules (synced from `ovrgrid/airules` - do not edit here)
 
 These come from `RULES.md` in `ovrgrid/airules` and are identical in every ovrgrid repo.
@@ -143,6 +143,29 @@ never have to ask for the settings screen: it is part of the feature, like its t
   than an oversight.
 - **The test before calling it done:** if the owner wanted this different tomorrow, where
   would he click? If the answer is "ask a session", it is not done.
+
+### R14. One task system - a task not managed is a task lost
+Owner call, 2026-09-27: "A task not managed is a task lost on a random page." Every task in
+the network - a build item, a person's to-do, a team assignment, a site's board item, a
+follow-up an AI raises - is one kind of thing with one profile, managed at the hub
+(**NTHSKY**) whichever page shows it. The profile is defined in the hub's
+`docs/TASK-STANDARD.md`; do not invent another.
+- **Sectioned, never different.** A site, a build, a working side, a team or a program can
+  have its own section of tasks. It never has its own kind of task: the same fields, the
+  same statuses, the same management everywhere.
+- **Chain of custody.** Who raised it, who holds it now, and every hand-off, status change
+  and edit, with who and when, kept in the task's own history. A task is closed (done or
+  dropped, with a reason), never deleted.
+- **Three views, one record.** Full function on the page it belongs to, the hub's admin
+  Tasks area with sections and filters, and the holder's own profile. A change in one is
+  the change in all three.
+- **Never a new task table.** A feature that needs tasks uses the hub's tasks with a section
+  of its own. A site that still keeps its own board mirrors it to the hub in the same
+  profile over 🕸 federation until it moves.
+- **Routing and reminders are switches** (R13): who may assign, where unassigned work lands,
+  when overdue work escalates, each with its control on an admin screen.
+- **The test:** if the holder never opens the page the task was made on, do they still see
+  it, and can an admin still find it and see who had it last? If not, it is lost.
 <!-- AIRULES:END -->
 
 ---
