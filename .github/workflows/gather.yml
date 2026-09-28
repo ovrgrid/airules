@@ -5,7 +5,8 @@ name: Weekly gather (facts)
 #
 # Collects evidence about every repo and commits it. No AI, no judgement, no writes to any
 # site. Needs only AIRULES_SYNC_TOKEN, the same secret the rules sync uses, so this half
-# works from the day the repo exists.
+# works from the day the repo exists. A consumer marked "gather": false (a private
+# program's repo) is never cloned here: this repo is public, and so is what it commits.
 
 on:
   schedule:
@@ -32,7 +33,7 @@ jobs:
           mkdir -p work
           python3 -c "
           import json
-          print('\n'.join(c['repo'] for c in json.load(open('sync/consumers.json'))['consumers']))
+          print('\n'.join(c['repo'] for c in json.load(open('sync/consumers.json'))['consumers'] if c.get('gather', True)))
           " | while read -r repo; do
             name="${repo#ovrgrid/}"
             git clone --quiet --filter=blob:none \

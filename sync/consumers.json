@@ -1,10 +1,11 @@
 {
-  "_comment": "Every repo that carries the AIRULES block. Adding a site to the network means adding one line here, not writing its rules again. 'file' is the file that holds the markers; 'branch' is the base branch the sync opens its PR against.",
+  "_comment": "Every repo that carries the AIRULES block. Adding a site to the network means adding one line here, not writing its rules again. 'file' is the file that holds the markers; 'branch' is the base branch the sync opens its PR against. 'gather': false keeps a repo out of the weekly gather, which commits what it finds into this PUBLIC repo: set it on a private program's repo, so the rules still reach it and nothing about it comes back here.",
   "consumers": [
     { "repo": "ovrgrid/nthsky.ai", "file": "CLAUDE.md", "branch": "main" },
     { "repo": "ovrgrid/ovrops",    "file": "CLAUDE.md", "branch": "main" },
     { "repo": "ovrgrid/ovr3d",     "file": "CLAUDE.md", "branch": "main" },
     { "repo": "ovrgrid/ovrflight", "file": "CLAUDE.md", "branch": "main" },
-    { "repo": "ovrgrid/teamtrain", "file": "CLAUDE.md", "branch": "main" }
+    { "repo": "ovrgrid/teamtrain", "file": "CLAUDE.md", "branch": "main" },
+    { "repo": "ovrgrid/ovr1",      "file": "CLAUDE.md", "branch": "main", "gather": false }
   ]
 }
