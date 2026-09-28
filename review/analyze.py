@@ -63,7 +63,7 @@ make must be traceable to a field in the evidence below. If the evidence does no
 question, say so and propose no task: an unfounded task on someone's board costs more than
 a gap in a report.
 
-Judge against these rules (R1 to R12):
+Judge against these rules (the whole current block, as synced):
 %s
 
 This week's evidence:
