@@ -26,7 +26,7 @@ it and it lives by it, but it does not own it.
 | `LESSONS.md` | What the network learned, harvested from every `BUILDLOG.md`. Append only. |
 | `REVIEW.md` | The two loops that keep this honest: the automatic sync, and the owner-invoked rules review. |
 | `CHANGELOG.md` | Every rule change, dated, with who decided it. |
-| `sync/consumers.json` | Every repo that carries the block. Adding a site is one line. |
+| `sync/consumers.json` | Every repo that carries the block. Adding a site is one line. A private program's repo gets `"gather": false`: the rules reach it, and the weekly gather never reads it, because what the gather finds is committed to this public repo. |
 | `sync/apply_block.py` | Swaps the block in one file. Exits 1 if nothing changed, 2 if the markers are missing. |
 | `.github/workflows/sync-rules.yml` | Fans the block out as docs-only PRs, on every rules change and weekly. |
 | `.github/workflows/gather.yml` | Saturday 03:00 Phoenix. Collects facts about all five repos into `reviews/<date>/`. No AI. |
@@ -49,9 +49,10 @@ it opened; there is no remote import. Text that stays here reaches nobody.
 
 ## Setup the owner does once
 
-1. Create a fine-grained personal access token scoped to the five repos in
-   `sync/consumers.json`, with **Contents: read and write** and **Pull requests: read and
-   write**. No other permissions.
+1. Create a fine-grained personal access token scoped to every repo in
+   `sync/consumers.json` (six on 2026-09-28: the five sites and the private `ovrgrid/ovr1`),
+   with **Contents: read and write** and **Pull requests: read and write**. No other
+   permissions. A repo added to the list later is added to the token's scope too.
 2. Add it to this repo as the secret `AIRULES_SYNC_TOKEN` (Settings, Secrets and variables,
    Actions). It lives only here: push-based sync means one token in one place instead of
    five repos each holding a read token for this one.
